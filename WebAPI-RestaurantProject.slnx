@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="RestaurantProject.WebAPILayer/RestaurantProject.WebAPILayer.csproj" />
+  <Project Path="RestaurantProject.WebUILayer/RestaurantProject.WebUILayer.csproj" Id="b4461cc2-0400-4801-b3b5-33ee2c37b64f" />
 </Solution>
