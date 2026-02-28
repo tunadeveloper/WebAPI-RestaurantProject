@@ -8,5 +8,6 @@ namespace RestaurantProject.WebAPILayer.DTOs.ProductDTOs
         public decimal ProductPrice { get; set; }
         public string ProductImageUrl { get; set; }
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 }

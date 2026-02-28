@@ -62,5 +62,13 @@ namespace RestaurantProject.WebAPILayer.Controllers
             var mapper = _mapper.Map<List<ResultProductDTO>>(values);
             return Ok(mapper);
         }
+
+        [HttpGet("ProductListWithCategory")]
+        public async Task<IActionResult> ProductListWithCategory()
+        {
+            var values = await _uow.Products.GetAllAsync(x=>x.Category);
+            var mapper = _mapper.Map<List<ResultProductDTO>>(values);
+            return Ok(mapper);
+        }
     }
 }

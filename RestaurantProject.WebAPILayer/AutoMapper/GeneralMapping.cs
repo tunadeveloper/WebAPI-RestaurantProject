@@ -42,7 +42,8 @@ namespace RestaurantProject.WebAPILayer.AutoMapper
             CreateMap<Message, UpdateMessageDTO>().ReverseMap();
 
             CreateMap<Product, CreateProductDTO>().ReverseMap();
-            CreateMap<Product, ResultProductDTO>().ReverseMap();
+            CreateMap<Product, ResultProductDTO>()
+    .ForMember(x => x.CategoryName, y => y.MapFrom(z => z.Category.CategoryName));
             CreateMap<Product, UpdateProductDTO>().ReverseMap();
 
             CreateMap<Reservation, CreateReservationDTO>().ReverseMap();

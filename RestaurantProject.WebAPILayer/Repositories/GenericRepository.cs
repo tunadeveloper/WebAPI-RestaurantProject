@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using RestaurantProject.WebAPILayer.Context;
+using System.Linq.Expressions;
 
 namespace RestaurantProject.WebAPILayer.Repositories
 {
@@ -28,6 +29,19 @@ namespace RestaurantProject.WebAPILayer.Repositories
         public async Task<List<T>> GetAllAsync()
         {
             return await _table.ToListAsync();
+        }
+
+        public async Task<List<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _table;
+            if(includes != null)
+            {
+                foreach(var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+            return await query.ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)
