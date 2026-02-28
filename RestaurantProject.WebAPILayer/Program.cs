@@ -1,5 +1,11 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RestaurantProject.WebAPILayer.AutoMapper;
 using RestaurantProject.WebAPILayer.Context;
+using RestaurantProject.WebAPILayer.DTOs.CategoryDTOs;
+using RestaurantProject.WebAPILayer.Entities;
 using RestaurantProject.WebAPILayer.Repositories;
 using RestaurantProject.WebAPILayer.UnitOfWorks;
 
@@ -14,8 +20,9 @@ builder.Services.AddDbContext<ApiContext>(options =>
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(GeneralMapping));
+builder.Services.AddControllers()
+       .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
