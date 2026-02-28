@@ -1,4 +1,10 @@
+using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantProject.WebAPILayer.DTOs.ReservationDTOs;
+using RestaurantProject.WebAPILayer.Entities;
+using RestaurantProject.WebAPILayer.UnitOfWorks;
+using System.Threading.Tasks;
 
 namespace RestaurantProject.WebAPILayer.Controllers
 {
@@ -6,5 +12,55 @@ namespace RestaurantProject.WebAPILayer.Controllers
     [Route("api/[controller]")]
     public class ReservationsController : ControllerBase
     {
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
+        public ReservationsController(IUnitOfWork uow, IMapper mapper)
+        {
+            _uow = uow;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList()
+        {
+            var values = await _uow.Reservations.GetAllAsync();
+            var mapper = _mapper.Map<List<ResultReservationDTO>>(values);
+            return Ok(mapper);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateReservationDTO dto)
+        {
+            var mapper = _mapper.Map<Reservation>(dto);
+            await _uow.Reservations.AddAsync(mapper);
+            await _uow.SaveAsync();
+            return Ok("Eklendi!");
+        }
+
+        [HttpPut]
+        public IActionResult Update(UpdateReservationDTO dto)
+        {
+            var mapper = _mapper.Map<Reservation>(dto);
+            _uow.Reservations.Update(mapper);
+            _uow.SaveAsync();
+            return Ok("Güncellendi!");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var values = await _uow.Reservations.GetByIdAsync(id);
+            _uow.Reservations.Delete(values);
+            await _uow.SaveAsync();
+            return Ok("Silindi!");
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var values = await _uow.Reservations.GetByIdAsync(id);
+            var mapper = _mapper.Map<List<ResultReservationDTO>>(values);
+            return Ok(mapper);
+        }
     }
 }

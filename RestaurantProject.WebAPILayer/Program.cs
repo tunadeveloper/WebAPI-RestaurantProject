@@ -1,11 +1,7 @@
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using RestaurantProject.WebAPILayer.AutoMapper;
 using RestaurantProject.WebAPILayer.Context;
-using RestaurantProject.WebAPILayer.DTOs.CategoryDTOs;
-using RestaurantProject.WebAPILayer.Entities;
 using RestaurantProject.WebAPILayer.Repositories;
 using RestaurantProject.WebAPILayer.UnitOfWorks;
 

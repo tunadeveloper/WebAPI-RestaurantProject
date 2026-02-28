@@ -1,10 +1,8 @@
 using AutoMapper;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantProject.WebAPILayer.DTOs.CategoryDTOs;
 using RestaurantProject.WebAPILayer.Entities;
 using RestaurantProject.WebAPILayer.UnitOfWorks;
-using System.Threading.Tasks;
 
 namespace RestaurantProject.WebAPILayer.Controllers
 {
@@ -31,7 +29,6 @@ namespace RestaurantProject.WebAPILayer.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCategoryDTO dto)
         {
-
             var mapper = _mapper.Map<Category>(dto);
             await _uow.Categories.AddAsync(mapper);
             await _uow.SaveAsync();
