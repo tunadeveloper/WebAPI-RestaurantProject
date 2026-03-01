@@ -1,3 +1,18 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Anasayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+@await Component.InvokeAsync("_HomeHeroComponentPartial")
+@await Component.InvokeAsync("_HomeAboutComponentPartial")
+@await Component.InvokeAsync("_HomeWhyUsComponentPartial")
+@await Component.InvokeAsync("_HomeStatsComponentPartial")
+@await Component.InvokeAsync("_HomeMenuComponentPartial")
+@await Component.InvokeAsync("_HomeTestimonialComponentPartial")
+@await Component.InvokeAsync("_HomeEventsComponentPartial")
+@await Component.InvokeAsync("_HomeChefsComponentPartial")
+@await Component.InvokeAsync("_HomeBookATableComponentPartial")
+@await Component.InvokeAsync("_HomeGalleryComponentPartial")
+@await Component.InvokeAsync("_HomeContactComponentPartial")

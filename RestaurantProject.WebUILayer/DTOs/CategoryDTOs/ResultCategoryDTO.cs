@@ -1,7 +1,6 @@
-﻿using RestaurantProject.WebAPILayer.DTOs.ProductDTOs;
-using RestaurantProject.WebAPILayer.Entities;
+using RestaurantProject.WebUILayer.DTOs.ProductDTOs;
 
-namespace RestaurantProject.WebAPILayer.DTOs.CategoryDTOs
+namespace RestaurantProject.WebUILayer.DTOs.CategoryDTOs
 {
     public class ResultCategoryDTO
     {

@@ -1,32 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="tr">
     @await Component.InvokeAsync("_LayoutHeadComponentPartial")
-
 <body class="index-page">
 
     @await Component.InvokeAsync("_LayoutHeaderComponentPartial")
 
     <main class="main">
 
-        @await Component.InvokeAsync("_HomeHeroComponentPartial")
-        @await Component.InvokeAsync("_HomeAboutComponentPartial")
-        @await Component.InvokeAsync("_HomeWhyUsComponentPartial")
-        @await Component.InvokeAsync("_HomeStatsComponentPartial")
-        @await Component.InvokeAsync("_HomeMenuComponentPartial")
-        @await Component.InvokeAsync("_HomeTestimonialComponentPartial")
-        @await Component.InvokeAsync("_HomeEventsComponentPartial")
-        @await Component.InvokeAsync("_HomeChefsComponentPartial")
-        @await Component.InvokeAsync("_HomeBookATableComponentPartial")
-        @await Component.InvokeAsync("_HomeGalleryComponentPartial")
-        @await Component.InvokeAsync("_HomeContactComponentPartial")
+        @RenderBody()
 
     </main>
 
     @await Component.InvokeAsync("_LayoutFooterComponentPartial")
-
     @await Component.InvokeAsync("_LayoutScriptComponentPartial")
 
 </body>
-
 </html>
