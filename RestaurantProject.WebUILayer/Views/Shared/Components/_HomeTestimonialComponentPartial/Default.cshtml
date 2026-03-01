@@ -1,11 +1,10 @@
-<!-- Testimonials Section -->
+@using RestaurantProject.WebUILayer.DTOs.TestimonialDTOs
+@model List<ResultTestimonialDTO>
 <section id="testimonials" class="testimonials section light-background">
-
-    <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
         <h2>MİŞTERİ YORUMLARI</h2>
         <p>Misafirlerimiz <span class="description-title">Bizim Hakkımızda Ne Diyor</span></p>
-    </div><!-- End Section Title -->
+    </div>
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -26,107 +25,43 @@
                 }
             </script>
             <div class="swiper-wrapper">
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="row gy-4 justify-content-center">
-                            <div class="col-lg-6">
-                                <div class="testimonial-content">
-                                    <p>
-                                        <i class="bi bi-quote quote-icon-left"></i>
-                                        <span>Harika bir deneyimdi. Yemekler çok lezzetli, ortam çok sıcaktı. Kesinlikle tekrar geleceğiz.</span>
-                                        <i class="bi bi-quote quote-icon-right"></i>
-                                    </p>
-                                    <h3>Ahmet Yılmaz</h3>
-                                    <h4>İşletme Sahibi</h4>
-                                    <div class="stars">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 text-center">
-                                <img src="/yummy-red-1.0.0/assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
-                            </div>
+              @foreach (var item in Model)
+{
+    <div class="swiper-slide">
+        <div class="testimonial-item">
+            <div class="row gy-4 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="testimonial-content">
+                        <p>
+                            <i class="bi bi-quote quote-icon-left"></i>
+                            <span>@item.TestimonialComment</span>
+                            <i class="bi bi-quote quote-icon-right"></i>
+                        </p>
+                        <h3>@item.TestimonialNameSurname</h3>
+                        <h4>@item.TestimonialTitle</h4>
+                        <div class="stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
                         </div>
                     </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="row gy-4 justify-content-center">
-                            <div class="col-lg-6">
-                                <div class="testimonial-content">
-                                    <p>
-                                        <i class="bi bi-quote quote-icon-left"></i>
-                                        <span>Personel çok ilgiliydi, yemekler taze ve lezzetliydi. Ailecek çok beğendik, herkese tavsiye ederim.</span>
-                                        <i class="bi bi-quote quote-icon-right"></i>
-                                    </p>
-                                    <h3>Ayşe Kaya</h3>
-                                    <h4>Tasarımcı</h4>
-                                    <div class="stars">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 text-center">
-                                <img src="/yummy-red-1.0.0/assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="row gy-4 justify-content-center">
-                            <div class="col-lg-6">
-                                <div class="testimonial-content">
-                                    <p>
-                                        <i class="bi bi-quote quote-icon-left"></i>
-                                        <span>Doğum günü kutlamamız için mükemmel bir mekan seçtik. Her şey kusursuzdu, teşekkürler!</span>
-                                        <i class="bi bi-quote quote-icon-right"></i>
-                                    </p>
-                                    <h3>Mehmet Demir</h3>
-                                    <h4>Girişimci</h4>
-                                    <div class="stars">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 text-center">
-                                <img src="/yummy-red-1.0.0/assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <div class="row gy-4 justify-content-center">
-                            <div class="col-lg-6">
-                                <div class="testimonial-content">
-                                    <p>
-                                        <i class="bi bi-quote quote-icon-left"></i>
-                                        <span>İş yemekleri için sık sık tercih ediyoruz. Profesyonel hizmet ve nefis lezzetler. Çok memnunuz.</span>
-                                        <i class="bi bi-quote quote-icon-right"></i>
-                                    </p>
-                                    <h3>Fatma Öz</h3>
-                                    <h4>Yönetici</h4>
-                                    <div class="stars">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 text-center">
-                                <img src="/yummy-red-1.0.0/assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End testimonial item -->
-
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="@item.TestimonialImageUrl"
+                         class="img-fluid testimonial-img"
+                         alt="@item.TestimonialNameSurname" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+               
             </div>
             <div class="swiper-pagination"></div>
         </div>
 
     </div>
 
-</section><!-- /Testimonials Section -->
+</section>
