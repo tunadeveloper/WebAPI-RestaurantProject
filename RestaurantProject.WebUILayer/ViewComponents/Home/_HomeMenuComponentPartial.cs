@@ -14,17 +14,26 @@ namespace RestaurantProject.WebUILayer.ViewComponents.Home
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int id)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7052/api/Categories/{id}/products");
-            if (responseMessage.IsSuccessStatusCode)
+            var categoriesWithProducts = new List<ResultCategoryDTO>();
+            var categoriesResponse = await client.GetAsync("https://localhost:7052/api/Categories");
+            var categoriesJson = await categoriesResponse.Content.ReadAsStringAsync();
+            var categories = JsonConvert.DeserializeObject<List<ResultCategoryDTO>>(categoriesJson);
+
+            foreach (var category in categories)
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCategoryDTO>>(jsonData);
-                return View(values);
+                var productResponse = await client.GetAsync($"https://localhost:7052/api/Categories/{category.Id}/products");
+                if (productResponse.IsSuccessStatusCode)
+                {
+                    var productJson = await productResponse.Content.ReadAsStringAsync();
+                    var categoryWithProducts = JsonConvert.DeserializeObject<ResultCategoryDTO>(productJson);
+                    categoriesWithProducts.Add(categoryWithProducts);
+                }
             }
-            return View();
+
+            return View(categoriesWithProducts);
         }
     }
 }

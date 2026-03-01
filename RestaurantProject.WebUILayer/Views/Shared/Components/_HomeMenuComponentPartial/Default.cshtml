@@ -1,12 +1,12 @@
 @using RestaurantProject.WebUILayer.DTOs.CategoryDTOs
+@using RestaurantProject.WebUILayer.DTOs.ProductDTOs
 @model List<ResultCategoryDTO>
         <section id="menu" class="menu section">
             <div class="container section-title" data-aos="fade-up">
                 <h2>Menümüz</h2>
                 <p><span>Lezzetli</span> <span class="description-title">Menümüzü Keşfedin</span></p>
             </div>
-            @if (Model != null && Model.Any())
-    { 
+
     <div class="container">
 
                 <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
@@ -49,10 +49,5 @@
            
                 </div>
             </div>
-
-    }
-    else
-    {
-        <p>Ürün Eklenmedi</p>
     }
         </section>
