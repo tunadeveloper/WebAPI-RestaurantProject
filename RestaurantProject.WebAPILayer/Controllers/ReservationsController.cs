@@ -38,8 +38,8 @@ namespace RestaurantProject.WebAPILayer.Controllers
             return Ok("Eklendi!");
         }
 
-        [HttpPut]
-        public IActionResult Update(UpdateReservationDTO dto)
+        [HttpPut("Update")]
+        public IActionResult UpdateReservation(UpdateReservationDTO dto)
         {
             var mapper = _mapper.Map<Reservation>(dto);
             _uow.Reservations.Update(mapper);
