@@ -1,20 +1,20 @@
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using RestaurantProject.WebAPILayer.DTOs.MessageDTOs;
+using RestaurantProject.WebAPILayer.DTOs.EventsDTOs;
 using RestaurantProject.WebAPILayer.Entities;
 using RestaurantProject.WebAPILayer.UnitOfWorks;
-using System.Threading.Tasks;
 
 namespace RestaurantProject.WebAPILayer.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class MessagesController : ControllerBase
+    public class EventsController : ControllerBase
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
-        public MessagesController(IUnitOfWork uow, IMapper mapper)
+
+        public EventsController(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
             _mapper = mapper;
@@ -23,27 +23,25 @@ namespace RestaurantProject.WebAPILayer.Controllers
         [HttpGet]
         public async Task<IActionResult> GetList()
         {
-            var values = await _uow.Messages.GetAllAsync();
-            var mapper = _mapper.Map<List<ResultMessageDTO>>(values);
+            var values = await _uow.Events.GetAllAsync();
+            var mapper = _mapper.Map<List<ResultEventsDTO>>(values);
             return Ok(mapper);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateMessageDTO dto)
+        public async Task<IActionResult> Create(CreateEventsDTO dto)
         {
-            var mapper = _mapper.Map<Message>(dto);
-            mapper.MessageSendDate = DateTime.Now;
-            mapper.MessageIsRead = false;
-            await _uow.Messages.AddAsync(mapper);
+            var mapper = _mapper.Map<Events>(dto);
+            await _uow.Events.AddAsync(mapper);
             await _uow.SaveAsync();
             return Ok("Eklendi!");
         }
 
         [HttpPut]
-        public IActionResult Update(UpdateMessageDTO dto)
+        public IActionResult Update(UpdateEventsDTO dto)
         {
-            var mapper = _mapper.Map<Message>(dto);
-            _uow.Messages.Update(mapper);
+            var mapper = _mapper.Map<Events>(dto);
+            _uow.Events.Update(mapper);
             _uow.SaveAsync();
             return Ok("Güncellendi!");
         }
@@ -51,8 +49,8 @@ namespace RestaurantProject.WebAPILayer.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var values = await _uow.Messages.GetByIdAsync(id);
-            _uow.Messages.Delete(values);
+            var values = await _uow.Events.GetByIdAsync(id);
+            _uow.Events.Delete(values);
             await _uow.SaveAsync();
             return Ok("Silindi!");
         }
@@ -60,8 +58,10 @@ namespace RestaurantProject.WebAPILayer.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var values = await _uow.Messages.GetByIdAsync(id);
-            var mapper = _mapper.Map<List<ResultMessageDTO>>(values);
+            var values = await _uow.Events.GetByIdAsync(id);
+            if (values == null)
+                return NotFound();
+            var mapper = _mapper.Map<ResultEventsDTO>(values);
             return Ok(mapper);
         }
     }

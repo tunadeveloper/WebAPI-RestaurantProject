@@ -15,6 +15,7 @@ namespace RestaurantProject.WebAPILayer.UnitOfWorks
         IRepository<Reservation> Reservations { get; }
         IRepository<Service> Services { get; }
         IRepository<Testimonial> Testimonials { get; }
+        IRepository<Events> Events { get; }
 
         Task<int> SaveAsync();
     }

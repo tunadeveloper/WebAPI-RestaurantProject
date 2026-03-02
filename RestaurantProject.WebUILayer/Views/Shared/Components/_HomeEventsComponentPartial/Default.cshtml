@@ -1,4 +1,5 @@
-<!-- Events Section -->
+@using RestaurantProject.WebUILayer.DTOs.EventsDTOs
+@model List<ResultEventsDTO>
 <section id="events" class="events section">
 
     <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
@@ -30,43 +31,19 @@
                 }
             </script>
             <div class="swiper-wrapper">
-
-                <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/yummy-red-1.0.0/assets/img/events-1.jpg)">
-<h3>Özel Partiler</h3>
-                            <div class="price align-self-start">₺2999</div>
+                @foreach(var item in Model){
+                <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(@item.EventsImageUrl)">
+<h3>@item.EventsTitle</h3>
+                            <div class="price align-self-start">₺@item.EventsPrice</div>
                             <p class="description">
-                                Özel günleriniz için mekanımızı kiralayın. Doğum günü, yıldönümü ve özel kutlamalarınız için hizmetinizdeyiz.
+                                @item.EventsDescription
                             </p>
-                </div><!-- End Event item -->
-
-                <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/yummy-red-1.0.0/assets/img/events-2.jpg)">
-<h3>Özel Davetler</h3>
-                            <div class="price align-self-start">₺5999</div>
-                            <p class="description">
-                                İş toplantıları ve özel davetleriniz için kapalı mekan. Özel menü ve hizmet seçenekleri.
-                            </p>
-                </div><!-- End Event item -->
-
-                <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/yummy-red-1.0.0/assets/img/events-3.jpg)">
-<h3>Doğum Günü Partileri</h3>
-                            <div class="price align-self-start">₺8999</div>
-                            <p class="description">
-                                Unutulmaz doğum günü kutlamaları için özel paketler. Pasta, süsleme ve özel menü dahil.
-                            </p>
-                </div><!-- End Event item -->
-
-                <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(/yummy-red-1.0.0/assets/img/events-4.jpg)">
-<h3>Düğün Organizasyonları</h3>
-                            <div class="price align-self-start">₺19999</div>
-                            <p class="description">
-                                Düğün ve nişan organizasyonlarınız için tam hizmet. Mekan, yemek ve dekorasyon çözümleri.
-                            </p>
-                </div><!-- End Event item -->
-
+                </div>
+                }
             </div>
             <div class="swiper-pagination"></div>
         </div>
 
     </div>
 
-</section><!-- /Events Section -->
+</section>

@@ -8,6 +8,7 @@ using RestaurantProject.WebAPILayer.DTOs.MessageDTOs;
 using RestaurantProject.WebAPILayer.DTOs.ProductDTOs;
 using RestaurantProject.WebAPILayer.DTOs.ReservationDTOs;
 using RestaurantProject.WebAPILayer.DTOs.ServiceDTOs;
+using RestaurantProject.WebAPILayer.DTOs.EventsDTOs;
 using RestaurantProject.WebAPILayer.DTOs.TestimonialDTOs;
 using RestaurantProject.WebAPILayer.Entities;
 
@@ -57,6 +58,10 @@ namespace RestaurantProject.WebAPILayer.AutoMapper
             CreateMap<Testimonial, CreateTestimonialDTO>().ReverseMap();
             CreateMap<Testimonial, ResultTestimonialDTO>().ReverseMap();
             CreateMap<Testimonial, UpdateTestimonialDTO>().ReverseMap();
+
+            CreateMap<Events, CreateEventsDTO>().ReverseMap();
+            CreateMap<Events, ResultEventsDTO>().ReverseMap();
+            CreateMap<Events, UpdateEventsDTO>().ReverseMap();
         }
     }
 }

@@ -1,11 +1,10 @@
-<!-- Gallery Section -->
+@using RestaurantProject.WebUILayer.DTOs.ImageDTOs
+@model List<ResultImageDTO>
 <section id="gallery" class="gallery section light-background">
-
-    <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
         <h2>Galeri</h2>
         <p><span>Lezzetlerimizi</span> <span class="description-title">Keşfedin</span></p>
-    </div><!-- End Section Title -->
+    </div>
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -41,18 +40,13 @@
                 }
             </script>
             <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="/yummy-red-1.0.0/assets/img/gallery/gallery-1.jpg"><img src="/yummy-red-1.0.0/assets/img/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
-                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="/yummy-red-1.0.0/assets/img/gallery/gallery-2.jpg"><img src="/yummy-red-1.0.0/assets/img/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
-                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="/yummy-red-1.0.0/assets/img/gallery/gallery-3.jpg"><img src="/yummy-red-1.0.0/assets/img/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
-                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="/yummy-red-1.0.0/assets/img/gallery/gallery-4.jpg"><img src="/yummy-red-1.0.0/assets/img/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
-                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="/yummy-red-1.0.0/assets/img/gallery/gallery-5.jpg"><img src="/yummy-red-1.0.0/assets/img/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
-                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="/yummy-red-1.0.0/assets/img/gallery/gallery-6.jpg"><img src="/yummy-red-1.0.0/assets/img/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
-                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="/yummy-red-1.0.0/assets/img/gallery/gallery-7.jpg"><img src="/yummy-red-1.0.0/assets/img/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
-                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="/yummy-red-1.0.0/assets/img/gallery/gallery-8.jpg"><img src="/yummy-red-1.0.0/assets/img/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
+                @foreach(var item in Model){
+                <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="@item.ImageUrl"><img src="@item.ImageUrl" class="img-fluid" alt="@item.ImageTitle"></a></div>
+                }
             </div>
             <div class="swiper-pagination"></div>
         </div>
 
     </div>
 
-</section><!-- /Gallery Section -->
+</section>

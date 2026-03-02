@@ -32,6 +32,7 @@ namespace RestaurantProject.WebAPILayer.Controllers
         public async Task<IActionResult> Create(CreateReservationDTO dto)
         {
             var mapper = _mapper.Map<Reservation>(dto);
+            mapper.ReservationStatus = "Beklemede";
             await _uow.Reservations.AddAsync(mapper);
             await _uow.SaveAsync();
             return Ok("Eklendi!");

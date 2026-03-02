@@ -28,6 +28,8 @@ namespace RestaurantProject.WebAPILayer.UnitOfWorks
 
         public IRepository<Testimonial> Testimonials { get; private set; }
 
+        public IRepository<Events> Events { get; private set; }
+
         public UnitOfWork(ApiContext context)
         {
             _context = context;
@@ -41,6 +43,7 @@ namespace RestaurantProject.WebAPILayer.UnitOfWorks
             Reservations = new GenericRepository<Reservation>(_context);
             Services = new GenericRepository<Service>(_context);
             Testimonials = new GenericRepository<Testimonial>(_context);
+            Events = new GenericRepository<Events>(_context);
         }
 
         public async Task<int> SaveAsync()

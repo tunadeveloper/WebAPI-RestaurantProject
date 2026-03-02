@@ -1,75 +1,41 @@
-<!-- Chefs Section -->
+@using RestaurantProject.WebUILayer.DTOs.ChefDTOs
+@model List<ResultChefDTO>
+@{
+    int delay = 100;
+}
 <section id="chefs" class="chefs section">
-
-    <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
         <h2>Şeflerimiz</h2>
         <p><span>Usta</span> <span class="description-title">Şeflerimiz<br></span></p>
-    </div><!-- End Section Title -->
+    </div>
 
     <div class="container">
 
         <div class="row gy-4">
-
-            <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                <div class="team-member">
-                    <div class="member-img">
-                        <img src="/yummy-red-1.0.0/assets/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
+            @foreach(var item in Model)
+            {
+                <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="@delay">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="@item.ChefImageUrl" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>@item.ChefNameSurname</h4>
+                            <span>@item.ChefTitle</span>
+                            <p>@item.ChefDescription</p>
                         </div>
                     </div>
-                    <div class="member-info">
-<h4>Mehmet Arda</h4>
-                                <span>Baş Şef</span>
-                                <p>20 yılı aşkın deneyimiyle ulusal ve uluslararası mutfaklarda uzman. Lezzet ve sunuma özel önem veriyor.</p>
-                    </div>
                 </div>
-            </div><!-- End Chef Team Member -->
 
-            <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                <div class="team-member">
-                    <div class="member-img">
-                        <img src="/yummy-red-1.0.0/assets/img/chefs/chefs-2.jpg" class="img-fluid" alt="">
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="member-info">
-<h4>Elif Yıldız</h4>
-                                <span>Pastacı Şef</span>
-                                <p>Tatlı ve pastalarımızın yaratıcısı. Geleneksel ve modern tarifleri harmanlayan özel lezzetler.</p>
-                    </div>
-                </div>
-            </div><!-- End Chef Team Member -->
-
-            <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-                <div class="team-member">
-                    <div class="member-img">
-                        <img src="/yummy-red-1.0.0/assets/img/chefs/chefs-3.jpg" class="img-fluid" alt="">
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-                    <div class="member-info">
-<h4>Can Öztürk</h4>
-                                <span>Aşçı</span>
-                                <p>Taze malzemeler ve geleneksel tekniklerle günlük menümüzü hazırlıyor. Her tabakta özen var.</p>
-                    </div>
-                </div>
-            </div><!-- End Chef Team Member -->
-
+                delay += 100;
+            }
+           
         </div>
-
     </div>
-
-</section><!-- /Chefs Section -->
+</section>

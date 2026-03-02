@@ -1,18 +1,17 @@
-<!-- Contact Section -->
+@using RestaurantProject.WebUILayer.DTOs.ContactDTOs
+@model ResultContactDTO
 <section id="contact" class="contact section">
-
-    <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
         <h2>İletişim</h2>
         <p><span>Yardıma mı ihtiyacınız var?</span> <span class="description-title">Bize Ulaşın</span></p>
-    </div><!-- End Section Title -->
+    </div>
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="mb-5">
-            <iframe style="width: 100%; height: 400px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen=""></iframe>
-        </div><!-- End Google Maps -->
 
+        <div class="mb-5">
+            <iframe style="width: 100%; height: 400px;" src="@Model.ContactMapLocation" frameborder="0" allowfullscreen=""></iframe>
+        </div>
         <div class="row gy-4">
 
             <div class="col-md-6">
@@ -20,73 +19,43 @@
                     <i class="icon bi bi-geo-alt flex-shrink-0"></i>
                     <div>
                         <h3>Adres</h3>
-                        <p>Örnek Mahallesi, Restoran Sokak No:1, İstanbul</p>
+                        <p>@Model.ContactAddress</p>
                     </div>
                 </div>
-            </div><!-- End Info Item -->
+            </div>
 
             <div class="col-md-6">
                 <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="300">
                     <i class="icon bi bi-telephone flex-shrink-0"></i>
                     <div>
                         <h3>Bizi Arayın</h3>
-                        <p>+1 5589 55488 55</p>
+                        <p>@Model.ContactPhoneNumber</p>
                     </div>
                 </div>
-            </div><!-- End Info Item -->
+            </div>
 
             <div class="col-md-6">
                 <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="400">
                     <i class="icon bi bi-envelope flex-shrink-0"></i>
                     <div>
                         <h3>E-posta Gönderin</h3>
-                        <p>info@example.com</p>
+                        <p>@Model.ContactEmail</p>
                     </div>
                 </div>
-            </div><!-- End Info Item -->
+            </div>
 
             <div class="col-md-6">
                 <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="500">
                     <i class="icon bi bi-clock flex-shrink-0"></i>
                     <div>
                         <h3>Çalışma Saatleri<br></h3>
-                        <p><strong>Pzt-Cum:</strong> 11:00 - 23:00; <strong>Pazar:</strong> Kapalı</p>
+                        <p>@Model.ContactOpenTimes</p>
                     </div>
                 </div>
-            </div><!-- End Info Item -->
+            </div>
 
         </div>
 
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
-            <div class="row gy-4">
-
-                <div class="col-md-6">
-                    <input type="text" name="name" class="form-control" placeholder="Adınız Soyadınız" required="">
-                </div>
-
-                <div class="col-md-6 ">
-                    <input type="email" class="form-control" name="email" placeholder="E-posta Adresiniz" required="">
-                </div>
-
-                <div class="col-md-12">
-                    <input type="text" class="form-control" name="subject" placeholder="Konu" required="">
-                </div>
-
-                <div class="col-md-12">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Mesajınız" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                    <div class="loading">Gönderiliyor</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Mesajınız gönderildi. Teşekkür ederiz!</div>
-
-                    <button type="submit">Mesaj Gönder</button>
-                </div>
-
-            </div>
-        </form><!-- End Contact Form -->
-
+        @await Component.InvokeAsync("_HomeMessageComponentPartial")
     </div>
-
-</section><!-- /Contact Section -->
+</section>

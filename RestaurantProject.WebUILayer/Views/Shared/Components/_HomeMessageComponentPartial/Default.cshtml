@@ -1,0 +1,30 @@
+﻿@using RestaurantProject.WebUILayer.DTOs.MessageDTOs
+@model CreateMessageDTO
+<br />
+<form asp-action="SendMessage" asp-controller="Message" method="post" data-aos="fade-up" data-aos-delay="600">
+    <div class="row gy-4">
+
+        <div class="col-md-6">
+            <input type="text" name="MessageNameSurname" class="form-control" placeholder="Adınız Soyadınız" required="">
+        </div>
+
+        <div class="col-md-6 ">
+            <input type="email" class="form-control" name="MessageEmail" placeholder="E-posta Adresiniz" required="">
+        </div>
+
+        <div class="col-md-12">
+            <input type="text" class="form-control" name="MessageSubject" placeholder="Konu" required="">
+        </div>
+
+        <div class="col-md-12">
+            <textarea class="form-control" name="MessageDetails" rows="6" placeholder="Mesajınız" required=""></textarea>
+        </div>
+        <div class="col-md-12 text-center">
+            <button type="submit"
+                    style="background-color: #dc3545; color: white; border: none; padding: 12px 30px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: background-color 0.3s;">
+                Mesaj Gönder
+            </button>
+        </div>
+
+    </div>
+</form>
