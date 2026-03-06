@@ -1,4 +1,4 @@
-﻿@using RestaurantProject.WebUILayer.DTOs.ReservationDTOs
+@using RestaurantProject.WebUILayer.DTOs.ReservationDTOs
 @model List<ResultReservationDTO>
 
 @{
@@ -12,6 +12,7 @@
         <div class="card">
             <div class="card-header">
                 <h4>Rezervasyon Tablosu</h4>
+                <a href="/Admin/Reservation/CreateReservation" class="btn btn-success">Rezervasyon Oluştur</a>
             </div>
 
             <div class="card-body p-0">
@@ -45,10 +46,8 @@
                                 </td>
 
                                 <td>
-                                    <a href="/Admin/Reservation/Detail/@item.Id" class="btn btn-success">Onayla</a>
-                                    <a href="/Admin/Reservation/Detail/@item.Id" class="btn btn-warning">Beklet</a>
-                                    <a href="/Admin/Reservation/Detail/@item.Id" class="btn btn-danger">İptal Et</a>
-                                    <a href="/Admin/Reservation/Detail/@item.Id" class="btn btn-primary">Detay</a>
+                                    <a href="/Admin/Reservation/DeleteReservation/@item.Id" class="btn btn-danger">Sil</a>
+                                    <a href="/Admin/Reservation/UpdateReservation/@item.Id" class="btn btn-primary">Detaylar</a>
                                 </td>
                             </tr>
                         }

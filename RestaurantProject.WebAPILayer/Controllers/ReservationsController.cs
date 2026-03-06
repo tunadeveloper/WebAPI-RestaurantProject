@@ -60,7 +60,7 @@ namespace RestaurantProject.WebAPILayer.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var values = await _uow.Reservations.GetByIdAsync(id);
-            var mapper = _mapper.Map<List<ResultReservationDTO>>(values);
+            var mapper = _mapper.Map<ResultReservationDTO>(values);
             return Ok(mapper);
         }
     }

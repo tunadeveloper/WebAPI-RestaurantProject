@@ -1,0 +1,64 @@
+@model RestaurantProject.WebUILayer.DTOs.ReservationDTOs.ResultReservationDTO
+@{
+    ViewData["Title"] = "Rezervasyon Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Rezervasyon Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Reservation/UpdateReservation" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="ReservationNameSurname">Ad Soyad</label>
+                            <input type="text" class="form-control" id="ReservationNameSurname" name="ReservationNameSurname" value="@Model.ReservationNameSurname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ReservationEmail">E-posta</label>
+                            <input type="email" class="form-control" id="ReservationEmail" name="ReservationEmail" value="@Model.ReservationEmail" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ReservationPhoneNumber">Telefon</label>
+                            <input type="text" class="form-control" id="ReservationPhoneNumber" name="ReservationPhoneNumber" value="@Model.ReservationPhoneNumber" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ReservationDate">Tarih ve Saat</label>
+                            <input type="datetime-local" class="form-control" id="ReservationDate" name="ReservationDate" value="@Model.ReservationDate.ToString("yyyy-MM-ddTHH:mm")" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ReservationCountOfPeople">Kişi Sayısı</label>
+                            <input type="number" class="form-control" id="ReservationCountOfPeople" name="ReservationCountOfPeople" value="@Model.ReservationCountOfPeople" min="1" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ReservationMessage">Mesaj</label>
+                            <textarea class="form-control" id="ReservationMessage" name="ReservationMessage" rows="3">@(Model.ReservationMessage ?? "")</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ReservationStatus">Durum</label>
+                            <select class="form-control" id="ReservationStatus" name="ReservationStatus">
+                                <option value="Beklemede" @(Model.ReservationStatus == "Beklemede" ? "selected" : "")>Beklemede</option>
+                                <option value="Onaylandı" @(Model.ReservationStatus == "Onaylandı" ? "selected" : "")>Onaylandı</option>
+                                <option value="İptal Edildi" @(Model.ReservationStatus == "İptal Edildi" ? "selected" : "")>İptal Edildi</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Reservation/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Rezervasyon bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Reservation/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
