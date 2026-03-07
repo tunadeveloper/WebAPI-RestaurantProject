@@ -1,8 +1,16 @@
+using RestaurantProject.WebUILayer.Areas.Admin.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
-
+builder.Services.Configure<OpenAI>(builder.Configuration.GetSection("OpenAI"));
+builder.Services.AddSingleton(sp =>
+{
+    var openAI = new OpenAI();
+    sp.GetRequiredService<IConfiguration>().GetSection("OpenAI").Bind(openAI);
+    return openAI;
+});
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {

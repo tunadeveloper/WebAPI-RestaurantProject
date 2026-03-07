@@ -8,5 +8,6 @@ namespace RestaurantProject.WebUILayer.DTOs.MessageDTOs
         public string MessageDetails { get; set; }
         public DateTime MessageSendDate { get; set; } = DateTime.Now;
         public bool MessageIsRead { get; set; } = false;
+        public string? MessageStatus { get; set; }
     }
 }

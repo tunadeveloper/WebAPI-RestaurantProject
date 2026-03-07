@@ -7,12 +7,13 @@ namespace RestaurantProject.WebUILayer.Areas.Admin.Controllers
     [Area("Admin")]
     public class AIController : Controller
     {
-        private const string apiKey = "";
+        private readonly OpenAI _openAI;
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public AIController(IHttpClientFactory httpClientFactory)
+        public AIController(IHttpClientFactory httpClientFactory, OpenAI openAI)
         {
             _httpClientFactory = httpClientFactory;
+            _openAI = openAI;
         }
 
         public IActionResult CreateRecipe()
@@ -24,10 +25,10 @@ namespace RestaurantProject.WebUILayer.Areas.Admin.Controllers
         public async Task<IActionResult> CreateRecipe(string prompt)
         {
             var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _openAI.ApiKey);
             var requestData = new
             {
-                model = "gpt-3.5-turbo",
+                model = _openAI.ModelName,
                 messages = new[]
                 {
                     new { role = "system", content = "Sen bir restoran için yemek önerileri yapan yapay zeka aracısın. Amacımız kullanıcı tarafından girilen malzemelere göre yemek tarifi önerisinde bulunmak." },
@@ -35,7 +36,7 @@ namespace RestaurantProject.WebUILayer.Areas.Admin.Controllers
                 },
                 temperature = 0.5
             };
-            var response = await client.PostAsJsonAsync("https://api.openai.com/v1/chat/completions", requestData);
+            var response = await client.PostAsJsonAsync($"{_openAI.BaseUrl}chat/completions", requestData);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<OpenAIResponse>();
