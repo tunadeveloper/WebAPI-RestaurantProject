@@ -1,0 +1,55 @@
+@model RestaurantProject.WebUILayer.DTOs.EventsDTOs.ResultEventsDTO
+@{
+    ViewData["Title"] = "Etkinlik Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Etkinlik Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Event/UpdateEvent" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="EventsTitle">Başlık</label>
+                            <input type="text" class="form-control" id="EventsTitle" name="EventsTitle" value="@Model.EventsTitle" />
+                        </div>
+                        <div class="form-group">
+                            <label for="EventsDescription">Açıklama</label>
+                            <textarea class="form-control" id="EventsDescription" name="EventsDescription" rows="3">@Model.EventsDescription</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="EventsImageUrl">Görsel URL</label>
+                            <input type="text" class="form-control" id="EventsImageUrl" name="EventsImageUrl" value="@Model.EventsImageUrl" />
+                        </div>
+                        <div class="form-group">
+                            <label for="EventsPrice">Fiyat</label>
+                            <input type="number" step="0.01" class="form-control" id="EventsPrice" name="EventsPrice" value="@Model.EventsPrice" />
+                        </div>
+                        <div class="form-group">
+                            <label for="EventsStatus">Durum</label>
+                            <select class="form-control" id="EventsStatus" name="EventsStatus">
+                                <option value="false" @(Model.EventsStatus == false ? "selected" : "")>Pasif</option>
+                                <option value="true" @(Model.EventsStatus == true ? "selected" : "")>Aktif</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Event/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Etkinlik bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Event/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

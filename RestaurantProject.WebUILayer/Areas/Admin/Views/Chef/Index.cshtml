@@ -1,0 +1,48 @@
+@using RestaurantProject.WebUILayer.DTOs.ChefDTOs
+@model List<ResultChefDTO>
+
+@{
+    ViewData["Title"] = "Şef Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int id = 0;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Şef Tablosu</h4>
+                <a href="/Admin/Chef/CreateChef" class="btn btn-success">Şef Oluştur</a>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Ad Soyad</th>
+                            <th>Ünvan</th>
+                            <th>Açıklama</th>
+                            <th>İşlem</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            id++;
+                            <tr>
+                                <td class="p-0 text-center">@id</td>
+                                <td>@item.ChefNameSurname</td>
+                                <td>@item.ChefTitle</td>
+                                <td>@item.ChefDescription</td>
+                                <td>
+                                    <a href="/Admin/Chef/DeleteChef/@item.Id" class="btn btn-danger">Sil</a>
+                                    <a href="/Admin/Chef/UpdateChef/@item.Id" class="btn btn-primary">Güncelle</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

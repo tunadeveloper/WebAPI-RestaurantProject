@@ -1,0 +1,36 @@
+@model RestaurantProject.WebUILayer.DTOs.CategoryDTOs.ResultCategoryDTO
+@{
+    ViewData["Title"] = "Kategori Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Kategori Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Category/UpdateCategory" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="CategoryName">Kategori Adı</label>
+                            <input type="text" class="form-control" id="CategoryName" name="CategoryName" value="@Model.CategoryName" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Category/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Kategori bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Category/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

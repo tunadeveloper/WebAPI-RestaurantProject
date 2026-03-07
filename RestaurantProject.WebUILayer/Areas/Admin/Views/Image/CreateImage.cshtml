@@ -1,0 +1,31 @@
+@using RestaurantProject.WebUILayer.DTOs.ImageDTOs
+@model CreateImageDTO
+
+@{
+    ViewData["Title"] = "Yeni Görsel";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Görsel Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateImage" asp-area="Admin" asp-controller="Image" method="post">
+                    <div class="form-group">
+                        <label for="ImageTitle">Başlık</label>
+                        <input type="text" class="form-control" id="ImageTitle" name="ImageTitle" placeholder="Başlık" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ImageUrl">URL</label>
+                        <input type="text" class="form-control" id="ImageUrl" name="ImageUrl" placeholder="URL" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Görsel Oluştur</button>
+                    <a href="/Admin/Image/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

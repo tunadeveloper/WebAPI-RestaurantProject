@@ -1,0 +1,48 @@
+@model RestaurantProject.WebUILayer.DTOs.ChefDTOs.ResultChefDTO
+@{
+    ViewData["Title"] = "Şef Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Şef Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Chef/UpdateChef" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="ChefNameSurname">Ad Soyad</label>
+                            <input type="text" class="form-control" id="ChefNameSurname" name="ChefNameSurname" value="@Model.ChefNameSurname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ChefTitle">Ünvan</label>
+                            <input type="text" class="form-control" id="ChefTitle" name="ChefTitle" value="@Model.ChefTitle" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ChefDescription">Açıklama</label>
+                            <textarea class="form-control" id="ChefDescription" name="ChefDescription" rows="3">@Model.ChefDescription</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ChefImageUrl">Görsel URL</label>
+                            <input type="text" class="form-control" id="ChefImageUrl" name="ChefImageUrl" value="@Model.ChefImageUrl" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Chef/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Şef bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Chef/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

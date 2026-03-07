@@ -1,0 +1,43 @@
+@using RestaurantProject.WebUILayer.DTOs.ProductDTOs
+@model CreateProductDTO
+
+@{
+    ViewData["Title"] = "Yeni Ürün";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Ürün Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateProduct" asp-area="Admin" asp-controller="Product" method="post">
+                    <div class="form-group">
+                        <label for="ProductName">Ürün Adı</label>
+                        <input type="text" class="form-control" id="ProductName" name="ProductName" placeholder="Ürün Adı" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ProductDescription">Açıklama</label>
+                        <textarea class="form-control" id="ProductDescription" name="ProductDescription" rows="3" placeholder="Açıklama"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ProductPrice">Fiyat</label>
+                        <input type="number" step="0.01" class="form-control" id="ProductPrice" name="ProductPrice" placeholder="Fiyat" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ProductImageUrl">Görsel URL</label>
+                        <input type="text" class="form-control" id="ProductImageUrl" name="ProductImageUrl" placeholder="Görsel URL" />
+                    </div>
+                    <div class="form-group">
+                        <label for="CategoryId">Kategori ID</label>
+                        <input type="number" class="form-control" id="CategoryId" name="CategoryId" placeholder="Kategori ID" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ürün Oluştur</button>
+                    <a href="/Admin/Product/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

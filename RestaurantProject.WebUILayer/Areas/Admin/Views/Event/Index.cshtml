@@ -1,0 +1,50 @@
+@using RestaurantProject.WebUILayer.DTOs.EventsDTOs
+@model List<ResultEventsDTO>
+
+@{
+    ViewData["Title"] = "Etkinlik Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int id = 0;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Etkinlik Tablosu</h4>
+                <a href="/Admin/Event/CreateEvent" class="btn btn-success">Etkinlik Oluştur</a>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Başlık</th>
+                            <th>Açıklama</th>
+                            <th>Fiyat</th>
+                            <th>Durum</th>
+                            <th>İşlem</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            id++;
+                            <tr>
+                                <td class="p-0 text-center">@id</td>
+                                <td>@item.EventsTitle</td>
+                                <td>@item.EventsDescription</td>
+                                <td>@item.EventsPrice</td>
+                                <td>@(item.EventsStatus ? "Aktif" : "Pasif")</td>
+                                <td>
+                                    <a href="/Admin/Event/DeleteEvent/@item.Id" class="btn btn-danger">Sil</a>
+                                    <a href="/Admin/Event/UpdateEvent/@item.Id" class="btn btn-primary">Güncelle</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

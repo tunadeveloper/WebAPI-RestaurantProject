@@ -1,0 +1,35 @@
+@using RestaurantProject.WebUILayer.DTOs.ServiceDTOs
+@model CreateServiceDTO
+
+@{
+    ViewData["Title"] = "Yeni Hizmet";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Hizmet Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateService" asp-area="Admin" asp-controller="Service" method="post">
+                    <div class="form-group">
+                        <label for="ServiceTitle">Başlık</label>
+                        <input type="text" class="form-control" id="ServiceTitle" name="ServiceTitle" placeholder="Başlık" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ServiceDescription">Açıklama</label>
+                        <textarea class="form-control" id="ServiceDescription" name="ServiceDescription" rows="3" placeholder="Açıklama"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ServiceIconUrl">İkon URL</label>
+                        <input type="text" class="form-control" id="ServiceIconUrl" name="ServiceIconUrl" placeholder="İkon URL" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Hizmet Oluştur</button>
+                    <a href="/Admin/Service/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

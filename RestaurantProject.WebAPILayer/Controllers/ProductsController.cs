@@ -38,11 +38,11 @@ namespace RestaurantProject.WebAPILayer.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(UpdateProductDTO dto)
+        public async Task<IActionResult> Update(UpdateProductDTO dto)
         {
             var mapper = _mapper.Map<Product>(dto);
             _uow.Products.Update(mapper);
-            _uow.SaveAsync();
+            await _uow.SaveAsync();
             return Ok("Güncellendi!");
         }
 

@@ -1,0 +1,46 @@
+@using RestaurantProject.WebUILayer.DTOs.EventsDTOs
+@model CreateEventsDTO
+
+@{
+    ViewData["Title"] = "Yeni Etkinlik";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Etkinlik Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateEvent" asp-area="Admin" asp-controller="Event" method="post">
+                    <div class="form-group">
+                        <label for="EventsTitle">Başlık</label>
+                        <input type="text" class="form-control" id="EventsTitle" name="EventsTitle" placeholder="Başlık" />
+                    </div>
+                    <div class="form-group">
+                        <label for="EventsDescription">Açıklama</label>
+                        <textarea class="form-control" id="EventsDescription" name="EventsDescription" rows="3" placeholder="Açıklama"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="EventsImageUrl">Görsel URL</label>
+                        <input type="text" class="form-control" id="EventsImageUrl" name="EventsImageUrl" placeholder="Görsel URL" />
+                    </div>
+                    <div class="form-group">
+                        <label for="EventsPrice">Fiyat</label>
+                        <input type="number" step="0.01" class="form-control" id="EventsPrice" name="EventsPrice" placeholder="Fiyat" />
+                    </div>
+                    <div class="form-group">
+                        <label for="EventsStatus">Durum</label>
+                        <select class="form-control" id="EventsStatus" name="EventsStatus">
+                            <option value="false">Pasif</option>
+                            <option value="true">Aktif</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Etkinlik Oluştur</button>
+                    <a href="/Admin/Event/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

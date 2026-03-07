@@ -1,0 +1,55 @@
+@model RestaurantProject.WebUILayer.DTOs.MessageDTOs.ResultMessageDTO
+@{
+    ViewData["Title"] = "Mesaj Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Mesaj Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Message/UpdateMessage" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="MessageNameSurname">Ad Soyad</label>
+                            <input type="text" class="form-control" id="MessageNameSurname" name="MessageNameSurname" value="@Model.MessageNameSurname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="MessageEmail">E-posta</label>
+                            <input type="email" class="form-control" id="MessageEmail" name="MessageEmail" value="@Model.MessageEmail" />
+                        </div>
+                        <div class="form-group">
+                            <label for="MessageSubject">Konu</label>
+                            <input type="text" class="form-control" id="MessageSubject" name="MessageSubject" value="@Model.MessageSubject" />
+                        </div>
+                        <div class="form-group">
+                            <label for="MessageDetails">Mesaj</label>
+                            <textarea class="form-control" id="MessageDetails" name="MessageDetails" rows="3">@Model.MessageDetails</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="MessageIsRead">Okundu</label>
+                            <select class="form-control" id="MessageIsRead" name="MessageIsRead">
+                                <option value="false" @(Model.MessageIsRead == false ? "selected" : "")>Hayır</option>
+                                <option value="true" @(Model.MessageIsRead == true ? "selected" : "")>Evet</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Message/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Mesaj bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Message/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

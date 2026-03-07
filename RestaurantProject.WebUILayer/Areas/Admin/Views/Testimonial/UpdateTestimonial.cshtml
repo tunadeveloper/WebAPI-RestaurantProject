@@ -1,0 +1,48 @@
+@model RestaurantProject.WebUILayer.DTOs.TestimonialDTOs.ResultTestimonialDTO
+@{
+    ViewData["Title"] = "Referans Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Referans Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Testimonial/UpdateTestimonial" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="TestimonialNameSurname">Ad Soyad</label>
+                            <input type="text" class="form-control" id="TestimonialNameSurname" name="TestimonialNameSurname" value="@Model.TestimonialNameSurname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="TestimonialTitle">Ünvan</label>
+                            <input type="text" class="form-control" id="TestimonialTitle" name="TestimonialTitle" value="@Model.TestimonialTitle" />
+                        </div>
+                        <div class="form-group">
+                            <label for="TestimonialComment">Yorum</label>
+                            <textarea class="form-control" id="TestimonialComment" name="TestimonialComment" rows="3">@Model.TestimonialComment</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="TestimonialImageUrl">Görsel URL</label>
+                            <input type="text" class="form-control" id="TestimonialImageUrl" name="TestimonialImageUrl" value="@Model.TestimonialImageUrl" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Testimonial/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Referans bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Testimonial/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

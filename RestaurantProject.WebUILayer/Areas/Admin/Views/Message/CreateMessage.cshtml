@@ -1,0 +1,39 @@
+@using RestaurantProject.WebUILayer.DTOs.MessageDTOs
+@model CreateMessageDTO
+
+@{
+    ViewData["Title"] = "Yeni Mesaj";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Mesaj Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateMessage" asp-area="Admin" asp-controller="Message" method="post">
+                    <div class="form-group">
+                        <label for="MessageNameSurname">Ad Soyad</label>
+                        <input type="text" class="form-control" id="MessageNameSurname" name="MessageNameSurname" placeholder="Ad Soyad" />
+                    </div>
+                    <div class="form-group">
+                        <label for="MessageEmail">E-posta</label>
+                        <input type="email" class="form-control" id="MessageEmail" name="MessageEmail" placeholder="E-posta" />
+                    </div>
+                    <div class="form-group">
+                        <label for="MessageSubject">Konu</label>
+                        <input type="text" class="form-control" id="MessageSubject" name="MessageSubject" placeholder="Konu" />
+                    </div>
+                    <div class="form-group">
+                        <label for="MessageDetails">Mesaj</label>
+                        <textarea class="form-control" id="MessageDetails" name="MessageDetails" rows="3" placeholder="Mesaj"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Mesaj Oluştur</button>
+                    <a href="/Admin/Message/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

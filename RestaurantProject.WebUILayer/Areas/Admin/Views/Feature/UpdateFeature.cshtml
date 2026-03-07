@@ -1,0 +1,48 @@
+@model RestaurantProject.WebUILayer.DTOs.FeatureDTOs.ResultFeatureDTO
+@{
+    ViewData["Title"] = "Özellik Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Özellik Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Feature/UpdateFeature" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="FeatureSubtitle">Alt Başlık</label>
+                            <input type="text" class="form-control" id="FeatureSubtitle" name="FeatureSubtitle" value="@Model.FeatureSubtitle" />
+                        </div>
+                        <div class="form-group">
+                            <label for="FeatureDescription">Açıklama</label>
+                            <textarea class="form-control" id="FeatureDescription" name="FeatureDescription" rows="3">@Model.FeatureDescription</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="FeatureImageUrl">Görsel URL</label>
+                            <input type="text" class="form-control" id="FeatureImageUrl" name="FeatureImageUrl" value="@Model.FeatureImageUrl" />
+                        </div>
+                        <div class="form-group">
+                            <label for="FeatureVideoUrl">Video URL</label>
+                            <input type="text" class="form-control" id="FeatureVideoUrl" name="FeatureVideoUrl" value="@Model.FeatureVideoUrl" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Feature/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Özellik bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Feature/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

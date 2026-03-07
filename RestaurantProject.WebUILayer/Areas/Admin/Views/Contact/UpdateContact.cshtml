@@ -1,0 +1,41 @@
+@model RestaurantProject.WebUILayer.DTOs.ContactDTOs.ResultContactDTO
+@{
+    ViewData["Title"] = "İletişim Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>İletişim Güncelle</h4>
+            </div>
+            <div class="card-body">
+                    <form action="/Admin/Contact/UpdateContact" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="ContactMapLocation">Harita Konumu</label>
+                            <input type="text" class="form-control" id="ContactMapLocation" name="ContactMapLocation" value="@Model.ContactMapLocation" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactAddress">Adres</label>
+                            <input type="text" class="form-control" id="ContactAddress" name="ContactAddress" value="@Model.ContactAddress" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactPhoneNumber">Telefon</label>
+                            <input type="text" class="form-control" id="ContactPhoneNumber" name="ContactPhoneNumber" value="@Model.ContactPhoneNumber" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactEmail">E-posta</label>
+                            <input type="email" class="form-control" id="ContactEmail" name="ContactEmail" value="@Model.ContactEmail" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ContactOpenTimes">Açılış Saatleri</label>
+                            <input type="text" class="form-control" id="ContactOpenTimes" name="ContactOpenTimes" value="@Model.ContactOpenTimes" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>

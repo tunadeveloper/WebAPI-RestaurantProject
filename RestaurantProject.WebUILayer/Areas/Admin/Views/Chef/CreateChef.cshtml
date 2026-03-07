@@ -1,0 +1,39 @@
+@using RestaurantProject.WebUILayer.DTOs.ChefDTOs
+@model CreateChefDTO
+
+@{
+    ViewData["Title"] = "Yeni Şef";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Şef Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateChef" asp-area="Admin" asp-controller="Chef" method="post">
+                    <div class="form-group">
+                        <label for="ChefNameSurname">Ad Soyad</label>
+                        <input type="text" class="form-control" id="ChefNameSurname" name="ChefNameSurname" placeholder="Ad Soyad" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ChefTitle">Ünvan</label>
+                        <input type="text" class="form-control" id="ChefTitle" name="ChefTitle" placeholder="Ünvan" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ChefDescription">Açıklama</label>
+                        <textarea class="form-control" id="ChefDescription" name="ChefDescription" rows="3" placeholder="Açıklama"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ChefImageUrl">Görsel URL</label>
+                        <input type="text" class="form-control" id="ChefImageUrl" name="ChefImageUrl" placeholder="Görsel URL" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Şef Oluştur</button>
+                    <a href="/Admin/Chef/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

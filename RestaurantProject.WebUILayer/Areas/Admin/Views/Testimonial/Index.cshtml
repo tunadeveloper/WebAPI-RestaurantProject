@@ -1,0 +1,48 @@
+@using RestaurantProject.WebUILayer.DTOs.TestimonialDTOs
+@model List<ResultTestimonialDTO>
+
+@{
+    ViewData["Title"] = "Referans Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int id = 0;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Referans Tablosu</h4>
+                <a href="/Admin/Testimonial/CreateTestimonial" class="btn btn-success">Referans Oluştur</a>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Ad Soyad</th>
+                            <th>Ünvan</th>
+                            <th>Yorum</th>
+                            <th>İşlem</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            id++;
+                            <tr>
+                                <td class="p-0 text-center">@id</td>
+                                <td>@item.TestimonialNameSurname</td>
+                                <td>@item.TestimonialTitle</td>
+                                <td>@item.TestimonialComment</td>
+                                <td>
+                                    <a href="/Admin/Testimonial/DeleteTestimonial/@item.Id" class="btn btn-danger">Sil</a>
+                                    <a href="/Admin/Testimonial/UpdateTestimonial/@item.Id" class="btn btn-primary">Güncelle</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

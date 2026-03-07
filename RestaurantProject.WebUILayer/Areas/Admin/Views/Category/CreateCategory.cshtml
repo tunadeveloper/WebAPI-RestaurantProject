@@ -1,0 +1,27 @@
+@using RestaurantProject.WebUILayer.DTOs.CategoryDTOs
+@model CreateCategoryDTO
+
+@{
+    ViewData["Title"] = "Yeni Kategori";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Kategori Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateCategory" asp-area="Admin" asp-controller="Category" method="post">
+                    <div class="form-group">
+                        <label for="CategoryName">Kategori Adı</label>
+                        <input type="text" class="form-control" id="CategoryName" name="CategoryName" placeholder="Kategori Adı" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kategori Oluştur</button>
+                    <a href="/Admin/Category/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

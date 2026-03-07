@@ -1,0 +1,52 @@
+@model RestaurantProject.WebUILayer.DTOs.ProductDTOs.ResultProductDTO
+@{
+    ViewData["Title"] = "Ürün Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Ürün Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Product/UpdateProduct" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="ProductName">Ürün Adı</label>
+                            <input type="text" class="form-control" id="ProductName" name="ProductName" value="@Model.ProductName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ProductDescription">Açıklama</label>
+                            <textarea class="form-control" id="ProductDescription" name="ProductDescription" rows="3">@Model.ProductDescription</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ProductPrice">Fiyat</label>
+                            <input type="number" step="0.01" class="form-control" id="ProductPrice" name="ProductPrice" value="@Model.ProductPrice" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ProductImageUrl">Görsel URL</label>
+                            <input type="text" class="form-control" id="ProductImageUrl" name="ProductImageUrl" value="@Model.ProductImageUrl" />
+                        </div>
+                        <div class="form-group">
+                            <label for="CategoryId">Kategori ID</label>
+                            <input type="number" class="form-control" id="CategoryId" name="CategoryId" value="@Model.CategoryId" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Product/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Ürün bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Product/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

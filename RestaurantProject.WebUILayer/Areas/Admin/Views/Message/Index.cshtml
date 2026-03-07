@@ -1,0 +1,52 @@
+@using RestaurantProject.WebUILayer.DTOs.MessageDTOs
+@model List<ResultMessageDTO>
+
+@{
+    ViewData["Title"] = "Mesaj Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int id = 0;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Mesaj Tablosu</h4>
+                <a href="/Admin/Message/CreateMessage" class="btn btn-success">Mesaj Oluştur</a>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Ad Soyad</th>
+                            <th>E-posta</th>
+                            <th>Konu</th>
+                            <th>Tarih</th>
+                            <th>Okundu</th>
+                            <th>İşlem</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            id++;
+                            <tr>
+                                <td class="p-0 text-center">@id</td>
+                                <td>@item.MessageNameSurname</td>
+                                <td>@item.MessageEmail</td>
+                                <td>@item.MessageSubject</td>
+                                <td>@item.MessageSendDate.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td>@(item.MessageIsRead ? "Evet" : "Hayır")</td>
+                                <td>
+                                    <a href="/Admin/Message/DeleteMessage/@item.Id" class="btn btn-danger">Sil</a>
+                                    <a href="/Admin/Message/UpdateMessage/@item.Id" class="btn btn-primary">Güncelle</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

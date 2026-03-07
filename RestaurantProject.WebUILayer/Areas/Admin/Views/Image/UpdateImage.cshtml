@@ -1,0 +1,40 @@
+@model RestaurantProject.WebUILayer.DTOs.ImageDTOs.ResultImageDTO
+@{
+    ViewData["Title"] = "Görsel Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Görsel Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Image/UpdateImage" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="ImageTitle">Başlık</label>
+                            <input type="text" class="form-control" id="ImageTitle" name="ImageTitle" value="@Model.ImageTitle" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ImageUrl">URL</label>
+                            <input type="text" class="form-control" id="ImageUrl" name="ImageUrl" value="@Model.ImageUrl" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Image/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Görsel bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Image/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

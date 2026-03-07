@@ -1,0 +1,39 @@
+@using RestaurantProject.WebUILayer.DTOs.FeatureDTOs
+@model CreateFeatureDTO
+
+@{
+    ViewData["Title"] = "Yeni Özellik";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Özellik Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateFeature" asp-area="Admin" asp-controller="Feature" method="post">
+                    <div class="form-group">
+                        <label for="FeatureSubtitle">Alt Başlık</label>
+                        <input type="text" class="form-control" id="FeatureSubtitle" name="FeatureSubtitle" placeholder="Alt Başlık" />
+                    </div>
+                    <div class="form-group">
+                        <label for="FeatureDescription">Açıklama</label>
+                        <textarea class="form-control" id="FeatureDescription" name="FeatureDescription" rows="3" placeholder="Açıklama"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="FeatureImageUrl">Görsel URL</label>
+                        <input type="text" class="form-control" id="FeatureImageUrl" name="FeatureImageUrl" placeholder="Görsel URL" />
+                    </div>
+                    <div class="form-group">
+                        <label for="FeatureVideoUrl">Video URL</label>
+                        <input type="text" class="form-control" id="FeatureVideoUrl" name="FeatureVideoUrl" placeholder="Video URL" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Özellik Oluştur</button>
+                    <a href="/Admin/Feature/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

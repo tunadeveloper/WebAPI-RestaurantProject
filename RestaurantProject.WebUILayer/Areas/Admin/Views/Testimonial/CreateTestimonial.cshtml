@@ -1,0 +1,39 @@
+@using RestaurantProject.WebUILayer.DTOs.TestimonialDTOs
+@model CreateTestimonialDTO
+
+@{
+    ViewData["Title"] = "Yeni Referans";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yeni Referans Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateTestimonial" asp-area="Admin" asp-controller="Testimonial" method="post">
+                    <div class="form-group">
+                        <label for="TestimonialNameSurname">Ad Soyad</label>
+                        <input type="text" class="form-control" id="TestimonialNameSurname" name="TestimonialNameSurname" placeholder="Ad Soyad" />
+                    </div>
+                    <div class="form-group">
+                        <label for="TestimonialTitle">Ünvan</label>
+                        <input type="text" class="form-control" id="TestimonialTitle" name="TestimonialTitle" placeholder="Ünvan" />
+                    </div>
+                    <div class="form-group">
+                        <label for="TestimonialComment">Yorum</label>
+                        <textarea class="form-control" id="TestimonialComment" name="TestimonialComment" rows="3" placeholder="Yorum"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="TestimonialImageUrl">Görsel URL</label>
+                        <input type="text" class="form-control" id="TestimonialImageUrl" name="TestimonialImageUrl" placeholder="Görsel URL" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Referans Oluştur</button>
+                    <a href="/Admin/Testimonial/Index" class="btn btn-secondary">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+@model RestaurantProject.WebUILayer.DTOs.ServiceDTOs.ResultServiceDTO
+@{
+    ViewData["Title"] = "Hizmet Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Hizmet Güncelle</h4>
+            </div>
+            <div class="card-body">
+                @if (Model != null)
+                {
+                    <form action="/Admin/Service/UpdateService" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label for="ServiceTitle">Başlık</label>
+                            <input type="text" class="form-control" id="ServiceTitle" name="ServiceTitle" value="@Model.ServiceTitle" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ServiceDescription">Açıklama</label>
+                            <textarea class="form-control" id="ServiceDescription" name="ServiceDescription" rows="3">@Model.ServiceDescription</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ServiceIconUrl">İkon URL</label>
+                            <input type="text" class="form-control" id="ServiceIconUrl" name="ServiceIconUrl" value="@Model.ServiceIconUrl" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                        <a href="/Admin/Service/Index" class="btn btn-secondary">İptal</a>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        Hizmet bulunamadı veya veri yüklenemedi.
+                    </div>
+                    <a href="/Admin/Service/Index" class="btn btn-secondary">Listeye Dön</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
