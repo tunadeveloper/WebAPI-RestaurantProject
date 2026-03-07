@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Yemek Tarifi Oluştur";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var recipe = ViewBag.recipe as string;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Yapay Zeka ile Tarif Önerisi</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-4">Elinizdeki malzemeleri yazın, yapay zeka size uygun yemek tarifi önersin.</p>
+                <form asp-action="CreateRecipe" asp-area="Admin" asp-controller="AI" method="post">
+                    <div class="form-group">
+                        <label for="prompt">Malzemeler</label>
+                        <textarea class="form-control" id="prompt" name="prompt" rows="4" placeholder="Örn: domates, soğan, sarımsak, zeytinyağı, tuz, biber..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-magic"></i> Tarif Oluştur
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(recipe))
+        {
+            <div class="card mt-4">
+                <div class="card-header bg-warning text-white">
+                    <h4 class="mb-0">Önerilen Tarif</h4>
+                </div>
+                <div class="card-body">
+                    <div class="recipe-content" style="white-space: pre-line;">@recipe</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
