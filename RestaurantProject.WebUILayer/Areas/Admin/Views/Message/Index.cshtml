@@ -39,6 +39,7 @@
                                 <td>@item.MessageSendDate.ToString("dd.MM.yyyy HH:mm")</td>
                                 <td>@(item.MessageIsRead ? "Evet" : "Hayır")</td>
                                 <td>
+                                    <a href="/Admin/Message/AnswerMessageWithOpenAI/@item.Id" class="btn btn-info">Mesajı Aç</a>
                                     <a href="/Admin/Message/DeleteMessage/@item.Id" class="btn btn-danger">Sil</a>
                                     <a href="/Admin/Message/UpdateMessage/@item.Id" class="btn btn-primary">Güncelle</a>
                                 </td>

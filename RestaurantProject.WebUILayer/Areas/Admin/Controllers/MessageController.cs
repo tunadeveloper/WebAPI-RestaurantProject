@@ -1,7 +1,10 @@
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RestaurantProject.WebUILayer.Areas.Admin.Models;
 using RestaurantProject.WebUILayer.DTOs.MessageDTOs;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +13,7 @@ namespace RestaurantProject.WebUILayer.Areas.Admin.Controllers
     [Area("Admin")]
     public class MessageController : Controller
     {
+        private const string apiKey = "";
         private readonly IHttpClientFactory _httpClientFactory;
 
         public MessageController(IHttpClientFactory httpClientFactory)
@@ -83,6 +87,43 @@ namespace RestaurantProject.WebUILayer.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Message", new { area = "Admin" });
             }
             return View();
+        }
+
+        public async Task<IActionResult> AnswerMessageWithOpenAI(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"https://localhost:7052/api/Messages/{id}");
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<ResultMessageDTO>(jsonData);
+            var messageText = values?.MessageDetails;
+
+            if (Request.Method == "POST")
+            {
+                var openAIClient = _httpClientFactory.CreateClient();
+                openAIClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+                var requestData = new
+                {
+                    model = "gpt-3.5-turbo",
+                    messages = new[]
+                    {
+                        new { role = "system", content = "Sen bir restoran için kullanıcıların gönderrmiş olduğu mesajları detaylı ve oldukça olumlu, müşteri memnuniyeti gözeten cevaplar veren bir yapay zeka aracısın. Amacımız kullanıcı tarafından gönderilen mesajlara en olumlu ve mantıklı cevapları sunabilmek." },
+                        new { role = "user", content = messageText }
+                    },
+                    temperature = 0.5
+                };
+                var response = await openAIClient.PostAsJsonAsync("https://api.openai.com/v1/chat/completions", requestData);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadFromJsonAsync<OpenAIResponse>();
+                    ViewBag.answerAI = result.choices[0].message.content;
+                }
+                else
+                {
+                    ViewBag.answerAI = "Bir hata oluştu: " + response.StatusCode;
+                }
+            }
+
+            return View(values);
         }
     }
 }
