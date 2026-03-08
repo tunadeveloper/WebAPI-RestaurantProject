@@ -6,7 +6,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     int id = 0;
 }
-
+<style>
+    .reservation-users-icon { color: #e67e22 !important; }
+</style>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -19,13 +21,11 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
-                            <th class="text-center">
-                               #
-                            </th>
+                            <th class="text-center">#</th>
                             <th>Ad Soyad</th>
-                            <th>Kişi Sayısı</th>
-                            <th>Tarih</th>
-                            <th>Saat</th>
+                            <th><i class="fas fa-users mr-1 reservation-users-icon"></i> Kişi Sayısı</th>
+                            <th><i class="fas fa-calendar-alt mr-1 text-info"></i> Tarih</th>
+                            <th><i class="fas fa-clock mr-1 text-success"></i> Saat</th>
                             <th>Durum</th>
                             <th>İşlem</th>
                         </tr>
@@ -33,21 +33,22 @@
                         @foreach (var item in Model)
                         {
                             id++;
+                            var statusLower = (item.ReservationStatus ?? "").ToLowerInvariant();
+                            var isIptal = statusLower.Contains("iptal");
+                            var isOnay = statusLower.Contains("onay");
+                            var statusIcon = isIptal ? "fas fa-times-circle" : isOnay ? "fas fa-check-circle" : "fas fa-hourglass-half";
                             <tr>
-                                <td class="p-0 text-center"> @id
-                                </td>
-
+                                <td class="p-0 text-center">@id</td>
                                 <td>@item.ReservationNameSurname</td>
-                                <td>@item.ReservationCountOfPeople kişi</td>
-                                <td>@item.ReservationDate.ToString("dd MMMM yyyy")</td>
-                                <td>@item.ReservationDate.ToString("HH:mm")</td>
+                                <td><i class="fas fa-users mr-1 reservation-users-icon"></i><span style="color:#2c3e50;">@item.ReservationCountOfPeople kişi</span></td>
+                                <td><i class="fas fa-calendar-alt text-info mr-1"></i>@item.ReservationDate.ToString("dd MMMM yyyy")</td>
+                                <td><i class="fas fa-clock text-success mr-1"></i>@item.ReservationDate.ToString("HH:mm")</td>
                                 <td>
-                                    <div class="badge badge-@(item.ReservationStatus == "İptal Edildi" ? "danger" : item.ReservationStatus == "Onaylandı" ? "success" : "warning")">@item.ReservationStatus</div>
+                                    <div class="badge badge-@(isIptal ? "danger" : isOnay ? "success" : "warning")"><i class="@statusIcon mr-1"></i>@item.ReservationStatus</div>
                                 </td>
-
                                 <td>
-                                    <a href="/Admin/Reservation/DeleteReservation/@item.Id" class="btn btn-danger">Sil</a>
-                                    <a href="/Admin/Reservation/UpdateReservation/@item.Id" class="btn btn-primary">Detaylar</a>
+                                    <a href="/Admin/Reservation/DeleteReservation/@item.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt mr-1"></i>Sil</a>
+                                    <a href="/Admin/Reservation/UpdateReservation/@item.Id" class="btn btn-primary btn-sm"><i class="fas fa-eye mr-1"></i>Detaylar</a>
                                 </td>
                             </tr>
                         }
