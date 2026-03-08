@@ -1,0 +1,312 @@
+@model RestaurantProject.WebUILayer.Areas.Admin.Models.DashboardViewModel
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+            <div class="card-statistic-4">
+                <div class="align-items-center justify-content-between">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div class="card-content">
+                                <h5 class="font-15">Rezervasyonlar</h5>
+                                <h2 class="mb-3 font-18">@Model.ReservationsCount</h2>
+                                <p class="mb-0"><span class="col-green">Kayıt</span> <a href="/Admin/Reservation/Index">Listele</a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                            <div class="banner-img">
+                                <img src="/otika-bootstrap-admin-template/assets/img/banner/1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+            <div class="card-statistic-4">
+                <div class="align-items-center justify-content-between">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div class="card-content">
+                                <h5 class="font-15">İletişim</h5>
+                                <h2 class="mb-3 font-18">@Model.ContactsCount</h2>
+                                <p class="mb-0"><span class="col-orange">Kayıt</span> <a href="/Admin/Contact/UpdateContact">Güncelle</a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                            <div class="banner-img">
+                                <img src="/otika-bootstrap-admin-template/assets/img/banner/2.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+            <div class="card-statistic-4">
+                <div class="align-items-center justify-content-between">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div class="card-content">
+                                <h5 class="font-15">Mesajlar</h5>
+                                <h2 class="mb-3 font-18">@Model.MessagesCount</h2>
+                                <p class="mb-0"><span class="col-green">Kayıt</span> <a href="/Admin/Message/Index">Listele</a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                            <div class="banner-img">
+                                <img src="/otika-bootstrap-admin-template/assets/img/banner/3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+            <div class="card-statistic-4">
+                <div class="align-items-center justify-content-between">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                            <div class="card-content">
+                                <h5 class="font-15">Ürünler</h5>
+                                <h2 class="mb-3 font-18">@Model.ProductsCount</h2>
+                                <p class="mb-0"><span class="col-green">Kayıt</span> <a href="/Admin/Product/Index">Listele</a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                            <div class="banner-img">
+                                <img src="/otika-bootstrap-admin-template/assets/img/banner/4.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Son 7 Gün Rezervasyonlar</h4>
+                <div class="card-header-action">
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Seçenekler</a>
+                        <div class="dropdown-menu">
+                            <a href="/Admin/Reservation/Index" class="dropdown-item has-icon"><i class="fas fa-calendar-check"></i> Rezervasyonlar</a>
+                            <a href="/Admin/Message/Index" class="dropdown-item has-icon"><i class="fas fa-envelope"></i> Mesajlar</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/Admin/Product/Index" class="dropdown-item has-icon"><i class="fas fa-utensils"></i> Ürünler</a>
+                        </div>
+                    </div>
+                    <a href="/Admin/Reservation/Index" class="btn btn-primary">Tümünü Gör</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div id="chart1"></div>
+                        <div class="row mb-0">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="list-inline text-center">
+                                    <div class="list-inline-item p-r-30">
+                                        <i data-feather="arrow-up-circle" class="col-green"></i>
+                                        <h5 class="m-b-0">@Model.ReservationsCount</h5>
+                                        <p class="text-muted font-14 m-b-0">Rezervasyon</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="list-inline text-center">
+                                    <div class="list-inline-item p-r-30">
+                                        <i data-feather="arrow-down-circle" class="col-orange"></i>
+                                        <h5 class="m-b-0">@Model.MessagesCount</h5>
+                                        <p class="text-muted font-14 m-b-0">Mesaj</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="list-inline text-center">
+                                    <div class="list-inline-item p-r-30">
+                                        <i data-feather="arrow-up-circle" class="col-green"></i>
+                                        <h5 class="mb-0 m-b-0">@Model.ProductsCount</h5>
+                                        <p class="text-muted font-14 m-b-0">Ürün</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="row mt-5">
+                            <div class="col-7 col-xl-7 mb-3">Rezervasyonlar</div>
+                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.ReservationsCount</span></div>
+                            <div class="col-7 col-xl-7 mb-3">İletişim</div>
+                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.ContactsCount</span></div>
+                            <div class="col-7 col-xl-7 mb-3">Etkinlikler</div>
+                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.EventsCount</span></div>
+                            <div class="col-7 col-xl-7 mb-3">Ürünler</div>
+                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.ProductsCount</span></div>
+                            <div class="col-7 col-xl-7 mb-3">Kategoriler</div>
+                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.CategoriesCount</span></div>
+                            <div class="col-7 col-xl-7 mb-3">Mesajlar</div>
+                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.MessagesCount</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>Rezervasyon Durumları</h4>
+            </div>
+            <div class="card-body">
+                <div id="chart4" class="chartsh"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>Aylara Göre Rezervasyonlar</h4>
+            </div>
+            <div class="card-body">
+                <div id="chart3" class="chartsh"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>Kategorilere Göre Ürün Sayısı</h4>
+            </div>
+            <div class="card-body">
+                <div id="chart2" class="chartsh"></div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+<script src="/otika-bootstrap-admin-template/assets/bundles/apexcharts/apexcharts.min.js"></script>
+<script>
+    window.reservation7Days = { labels: @Html.Raw(JsonSerializer.Serialize(Model.Last7DaysReservations?.Select(x => x.DateLabel).ToList() ?? new List<string>())), data: @Html.Raw(JsonSerializer.Serialize(Model.Last7DaysReservations?.Select(x => x.Count).ToList() ?? new List<int>())) };
+    window.categoryProducts = { labels: @Html.Raw(JsonSerializer.Serialize(Model.CategoryProductCounts?.Select(x => x.CategoryName).ToList() ?? new List<string>())), data: @Html.Raw(JsonSerializer.Serialize(Model.CategoryProductCounts?.Select(x => x.ProductCount).ToList() ?? new List<int>())) };
+    window.monthlyReservations = { labels: @Html.Raw(JsonSerializer.Serialize(Model.MonthlyReservations?.Select(x => x.MonthLabel).ToList() ?? new List<string>())), data: @Html.Raw(JsonSerializer.Serialize(Model.MonthlyReservations?.Select(x => x.Count).ToList() ?? new List<int>())) };
+    window.reservationStatus = { labels: @Html.Raw(JsonSerializer.Serialize(Model.ReservationStatusCounts?.Select(x => x.StatusName).ToList() ?? new List<string>())), data: @Html.Raw(JsonSerializer.Serialize(Model.ReservationStatusCounts?.Select(x => x.Count).ToList() ?? new List<int>())) };
+</script>
+<script>
+(function() {
+    var r7 = window.reservation7Days;
+    var cat = window.categoryProducts;
+    var monthly = window.monthlyReservations;
+    var resStatus = window.reservationStatus;
+
+    function chart1() {
+        var opt = {
+            chart: { height: 230, type: 'line', shadow: { enabled: true, color: '#000', top: 18, left: 7, blur: 10, opacity: 1 }, toolbar: { show: false } },
+            colors: ['#786BED'],
+            dataLabels: { enabled: true },
+            stroke: { curve: 'smooth' },
+            series: [{ name: 'Rezervasyon Sayısı', data: r7.data || [] }],
+            grid: { borderColor: '#e7e7e7', row: { colors: ['#f3f3f3', 'transparent'], opacity: 0 } },
+            markers: { size: 6 },
+            xaxis: { categories: r7.labels || [], labels: { style: { colors: '#9aa0ac' } } },
+            yaxis: { title: { text: 'Adet' }, labels: { style: { color: '#9aa0ac' } }, min: 0 },
+            legend: { position: 'top', horizontalAlign: 'right', floating: true, offsetY: -25, offsetX: -5 }
+        };
+        new ApexCharts(document.querySelector('#chart1'), opt).render();
+    }
+
+    function chart2() {
+        var opt = {
+            chart: { height: 250, type: 'bar', toolbar: { show: false } },
+            plotOptions: { bar: { horizontal: false, columnWidth: '55%', borderRadius: 4 } },
+            colors: ['#4CC2B0'],
+            dataLabels: { enabled: false },
+            series: [{ name: 'Ürün Sayısı', data: cat.data || [] }],
+            xaxis: { categories: cat.labels || [], labels: { style: { colors: '#9aa0ac' } } },
+            yaxis: { labels: { style: { color: '#9aa0ac' } }, min: 0 },
+            legend: { show: false },
+            grid: { borderColor: '#e7e7e7' }
+        };
+        new ApexCharts(document.querySelector('#chart2'), opt).render();
+    }
+
+    function chart3() {
+        var opt = {
+            chart: { height: 250, type: 'bar', toolbar: { show: false } },
+            plotOptions: { bar: { horizontal: false, columnWidth: '70%', borderRadius: 4 } },
+            colors: ['#786BED'],
+            dataLabels: { enabled: true },
+            series: [{ name: 'Rezervasyon', data: monthly.data || [] }],
+            xaxis: { categories: monthly.labels || [], labels: { style: { colors: '#9aa0ac' }, rotate: -45 } },
+            yaxis: { labels: { style: { color: '#9aa0ac' } }, min: 0 },
+            legend: { show: false },
+            grid: { borderColor: '#e7e7e7' }
+        };
+        new ApexCharts(document.querySelector('#chart3'), opt).render();
+    }
+
+    function chart4() {
+        var el = document.querySelector('#chart4');
+        if (!el) return;
+        var labels = (resStatus && resStatus.labels && resStatus.labels.length) ? resStatus.labels : ['Beklemede', 'Onaylı', 'İptal'];
+        var data = (resStatus && resStatus.data && resStatus.data.length) ? resStatus.data : [0, 0, 0];
+        var statusColors = { iptal: '#dc3545', onay: '#28a745', beklemede: '#fcb800' };
+        var barColors = labels.map(function(l) {
+            var raw = (l || '') + '';
+            var s = raw.toLocaleLowerCase('tr').replace(/\u0130/g, 'i').replace(/ı/g, 'i');
+            if (s.indexOf('iptal') !== -1) return statusColors.iptal;
+            if (s.indexOf('onay') !== -1) return statusColors.onay;
+            return statusColors.beklemede;
+        });
+        var opt = {
+            chart: { height: 250, type: 'bar', toolbar: { show: false } },
+            plotOptions: { bar: { horizontal: false, columnWidth: '60%', borderRadius: 4, distributed: true } },
+            colors: barColors,
+            dataLabels: { enabled: true },
+            series: [{ name: 'Adet', data: data }],
+            xaxis: { categories: labels, labels: { style: { colors: '#9aa0ac' } } },
+            yaxis: { labels: { style: { color: '#9aa0ac' } }, min: 0 },
+            legend: { show: false },
+            grid: { borderColor: '#e7e7e7' }
+        };
+        new ApexCharts(el, opt).render();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            chart1(); chart2(); chart3(); chart4();
+        });
+    } else {
+        chart1(); chart2(); chart3(); chart4();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof feather !== 'undefined') feather.replace();
+        var search = document.getElementById('tableSearch');
+        if (search) {
+            search.addEventListener('input', function() {
+                var q = this.value.toLowerCase();
+                document.querySelectorAll('#moduleTable tbody tr').forEach(function(tr) {
+                    tr.style.display = tr.textContent.toLowerCase().indexOf(q) > -1 ? '' : 'none';
+                });
+            });
+        }
+    });
+})();
+</script>
+}
