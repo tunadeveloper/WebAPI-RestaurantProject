@@ -20,6 +20,7 @@
                     <table class="table table-striped">
                         <tr>
                             <th class="text-center">#</th>
+                            <th>Görsel</th>
                             <th>Ad Soyad</th>
                             <th>Ünvan</th>
                             <th>Açıklama</th>
@@ -31,12 +32,22 @@
                             id++;
                             <tr>
                                 <td class="p-0 text-center">@id</td>
+                                <td>
+                                    @if (!string.IsNullOrWhiteSpace(item.ChefImageUrl))
+                                    {
+                                        <img src="@item.ChefImageUrl" alt="@(item.ChefNameSurname ?? "")" class="img-thumbnail" style="max-width:80px;max-height:80px;object-fit:cover;" />
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">—</span>
+                                    }
+                                </td>
                                 <td>@item.ChefNameSurname</td>
                                 <td>@item.ChefTitle</td>
                                 <td>@item.ChefDescription</td>
                                 <td>
-                                    <a href="/Admin/Chef/DeleteChef/@item.Id" class="btn btn-danger">Sil</a>
-                                    <a href="/Admin/Chef/UpdateChef/@item.Id" class="btn btn-primary">Güncelle</a>
+                                    <a href="/Admin/Chef/DeleteChef/@item.Id" class="btn btn-danger btn-sm">Sil</a>
+                                    <a href="/Admin/Chef/UpdateChef/@item.Id" class="btn btn-primary btn-sm">Güncelle</a>
                                 </td>
                             </tr>
                         }

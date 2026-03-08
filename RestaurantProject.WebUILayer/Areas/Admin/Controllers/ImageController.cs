@@ -48,8 +48,7 @@ namespace RestaurantProject.WebUILayer.Areas.Admin.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultImageDTO>>(jsonData);
-                var item = (values != null && values.Any()) ? values.First() : null;
+                var item = JsonConvert.DeserializeObject<ResultImageDTO>(jsonData);
                 return View(item);
             }
             return View();

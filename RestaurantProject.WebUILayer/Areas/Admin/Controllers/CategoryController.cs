@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestaurantProject.WebUILayer.DTOs.CategoryDTOs;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,8 +47,7 @@ namespace RestaurantProject.WebUILayer.Areas.Admin.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCategoryDTO>>(jsonData);
-                var item = (values != null && values.Any()) ? values.First() : null;
+                var item = JsonConvert.DeserializeObject<ResultCategoryDTO>(jsonData);
                 return View(item);
             }
             return View();

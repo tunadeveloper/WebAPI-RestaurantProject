@@ -1,10 +1,12 @@
 @using RestaurantProject.WebUILayer.DTOs.ReservationDTOs
 @model List<ResultReservationDTO>
 
+@using System.Globalization
 @{
     ViewData["Title"] = "Rezervasyon Listesi";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     int id = 0;
+    var tr = CultureInfo.GetCultureInfo("tr-TR");
 }
 <style>
     .reservation-users-icon { color: #e67e22 !important; }
@@ -33,10 +35,10 @@
                         @foreach (var item in Model)
                         {
                             id++;
-                            var statusLower = (item.ReservationStatus ?? "").ToLowerInvariant();
-                            var isIptal = statusLower.Contains("iptal");
-                            var isOnay = statusLower.Contains("onay");
-                            var statusIcon = isIptal ? "fas fa-times-circle" : isOnay ? "fas fa-check-circle" : "fas fa-hourglass-half";
+                            var statusNorm = (item.ReservationStatus ?? "").ToLower(tr);
+                            var isCancel = statusNorm.Contains("iptal");
+                            var isApproval = statusNorm.Contains("onay");
+                            var statusIcon = isCancel ? "fas fa-times-circle" : isApproval ? "fas fa-check-circle" : "fas fa-hourglass-half";
                             <tr>
                                 <td class="p-0 text-center">@id</td>
                                 <td>@item.ReservationNameSurname</td>
@@ -44,7 +46,7 @@
                                 <td><i class="fas fa-calendar-alt text-info mr-1"></i>@item.ReservationDate.ToString("dd MMMM yyyy")</td>
                                 <td><i class="fas fa-clock text-success mr-1"></i>@item.ReservationDate.ToString("HH:mm")</td>
                                 <td>
-                                    <div class="badge badge-@(isIptal ? "danger" : isOnay ? "success" : "warning")"><i class="@statusIcon mr-1"></i>@item.ReservationStatus</div>
+                                    <div class="badge badge-@(isCancel ? "danger" : isApproval ? "success" : "warning")"><i class="@statusIcon mr-1"></i>@item.ReservationStatus</div>
                                 </td>
                                 <td>
                                     <a href="/Admin/Reservation/DeleteReservation/@item.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt mr-1"></i>Sil</a>

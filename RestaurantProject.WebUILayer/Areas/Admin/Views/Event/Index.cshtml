@@ -20,6 +20,7 @@
                     <table class="table table-striped">
                         <tr>
                             <th class="text-center">#</th>
+                            <th>Görsel</th>
                             <th>Başlık</th>
                             <th>Açıklama</th>
                             <th>Fiyat</th>
@@ -32,13 +33,23 @@
                             id++;
                             <tr>
                                 <td class="p-0 text-center">@id</td>
+                                <td>
+                                    @if (!string.IsNullOrWhiteSpace(item.EventsImageUrl))
+                                    {
+                                        <img src="@item.EventsImageUrl" alt="@(item.EventsTitle ?? "")" class="img-thumbnail" style="max-width:80px;max-height:80px;object-fit:cover;" />
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">—</span>
+                                    }
+                                </td>
                                 <td>@item.EventsTitle</td>
                                 <td>@item.EventsDescription</td>
                                 <td>@item.EventsPrice</td>
                                 <td>@(item.EventsStatus ? "Aktif" : "Pasif")</td>
                                 <td>
-                                    <a href="/Admin/Event/DeleteEvent/@item.Id" class="btn btn-danger">Sil</a>
-                                    <a href="/Admin/Event/UpdateEvent/@item.Id" class="btn btn-primary">Güncelle</a>
+                                    <a href="/Admin/Event/DeleteEvent/@item.Id" class="btn btn-danger btn-sm">Sil</a>
+                                    <a href="/Admin/Event/UpdateEvent/@item.Id" class="btn btn-primary btn-sm">Güncelle</a>
                                 </td>
                             </tr>
                         }

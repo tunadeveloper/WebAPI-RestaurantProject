@@ -99,70 +99,10 @@
         <div class="card">
             <div class="card-header">
                 <h4>Son 7 Gün Rezervasyonlar</h4>
-                <div class="card-header-action">
-                    <div class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Seçenekler</a>
-                        <div class="dropdown-menu">
-                            <a href="/Admin/Reservation/Index" class="dropdown-item has-icon"><i class="fas fa-calendar-check"></i> Rezervasyonlar</a>
-                            <a href="/Admin/Message/Index" class="dropdown-item has-icon"><i class="fas fa-envelope"></i> Mesajlar</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="/Admin/Product/Index" class="dropdown-item has-icon"><i class="fas fa-utensils"></i> Ürünler</a>
-                        </div>
-                    </div>
-                    <a href="/Admin/Reservation/Index" class="btn btn-primary">Tümünü Gör</a>
-                </div>
+            
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <div id="chart1"></div>
-                        <div class="row mb-0">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <div class="list-inline text-center">
-                                    <div class="list-inline-item p-r-30">
-                                        <i data-feather="arrow-up-circle" class="col-green"></i>
-                                        <h5 class="m-b-0">@Model.ReservationsCount</h5>
-                                        <p class="text-muted font-14 m-b-0">Rezervasyon</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <div class="list-inline text-center">
-                                    <div class="list-inline-item p-r-30">
-                                        <i data-feather="arrow-down-circle" class="col-orange"></i>
-                                        <h5 class="m-b-0">@Model.MessagesCount</h5>
-                                        <p class="text-muted font-14 m-b-0">Mesaj</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <div class="list-inline text-center">
-                                    <div class="list-inline-item p-r-30">
-                                        <i data-feather="arrow-up-circle" class="col-green"></i>
-                                        <h5 class="mb-0 m-b-0">@Model.ProductsCount</h5>
-                                        <p class="text-muted font-14 m-b-0">Ürün</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="row mt-5">
-                            <div class="col-7 col-xl-7 mb-3">Rezervasyonlar</div>
-                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.ReservationsCount</span></div>
-                            <div class="col-7 col-xl-7 mb-3">İletişim</div>
-                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.ContactsCount</span></div>
-                            <div class="col-7 col-xl-7 mb-3">Etkinlikler</div>
-                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.EventsCount</span></div>
-                            <div class="col-7 col-xl-7 mb-3">Ürünler</div>
-                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.ProductsCount</span></div>
-                            <div class="col-7 col-xl-7 mb-3">Kategoriler</div>
-                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.CategoriesCount</span></div>
-                            <div class="col-7 col-xl-7 mb-3">Mesajlar</div>
-                            <div class="col-5 col-xl-5 mb-3"><span class="text-big">@Model.MessagesCount</span></div>
-                        </div>
-                    </div>
-                </div>
+                <div id="chart1" style="width:100%;"></div>
             </div>
         </div>
     </div>
@@ -216,7 +156,7 @@
 
     function chart1() {
         var opt = {
-            chart: { height: 230, type: 'line', shadow: { enabled: true, color: '#000', top: 18, left: 7, blur: 10, opacity: 1 }, toolbar: { show: false } },
+            chart: { height: 230, type: 'line', width: '100%', shadow: { enabled: true, color: '#000', top: 18, left: 7, blur: 10, opacity: 1 }, toolbar: { show: false } },
             colors: ['#786BED'],
             dataLabels: { enabled: true },
             stroke: { curve: 'smooth' },

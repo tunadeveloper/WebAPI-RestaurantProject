@@ -20,6 +20,7 @@
                     <table class="table table-striped">
                         <tr>
                             <th class="text-center">#</th>
+                            <th>Görsel</th>
                             <th>Başlık</th>
                             <th>URL</th>
                             <th>İşlem</th>
@@ -30,11 +31,21 @@
                             id++;
                             <tr>
                                 <td class="p-0 text-center">@id</td>
-                                <td>@item.ImageTitle</td>
-                                <td>@item.ImageUrl</td>
                                 <td>
-                                    <a href="/Admin/Image/DeleteImage/@item.Id" class="btn btn-danger">Sil</a>
-                                    <a href="/Admin/Image/UpdateImage/@item.Id" class="btn btn-primary">Güncelle</a>
+                                    @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                                    {
+                                        <img src="@item.ImageUrl" alt="@(item.ImageTitle ?? "")" class="img-thumbnail" style="max-width:80px;max-height:80px;object-fit:cover;" />
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">—</span>
+                                    }
+                                </td>
+                                <td>@item.ImageTitle</td>
+                                <td class="small text-break">@item.ImageUrl</td>
+                                <td>
+                                    <a href="/Admin/Image/DeleteImage/@item.Id" class="btn btn-danger btn-sm">Sil</a>
+                                    <a href="/Admin/Image/UpdateImage/@item.Id" class="btn btn-primary btn-sm">Güncelle</a>
                                 </td>
                             </tr>
                         }
