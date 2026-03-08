@@ -1,9 +1,12 @@
 using RestaurantProject.WebUILayer.Areas.Admin.Models;
+using RestaurantProject.WebUILayer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("openai", client => client.BaseAddress = new Uri("https://api.openai.com/v1/"));
 builder.Services.Configure<OpenAI>(builder.Configuration.GetSection("OpenAI"));
 builder.Services.AddSingleton(sp =>
 {
@@ -17,7 +20,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-
+app.MapHub<ChatHub>("/chathub");
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();

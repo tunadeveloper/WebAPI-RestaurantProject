@@ -1,0 +1,152 @@
+@{
+    ViewData["Title"] = "Yapay Zeka ile Sohbet";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #chatContainer {
+        background: #f8f9fa;
+        min-height: 420px;
+        max-height: 520px;
+        overflow-y: auto;
+    }
+    .chat-msg {
+        display: flex;
+        margin-bottom: 1rem;
+        clear: both;
+    }
+    .chat-msg.user { justify-content: flex-end; }
+    .chat-msg.assistant { justify-content: flex-start; }
+    .chat-bubble {
+        max-width: 80%;
+        padding: 0.6rem 1rem;
+        border-radius: 1rem;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .chat-msg.user .chat-bubble {
+        background: #4361ee;
+        color: #fff;
+        border-bottom-right-radius: 0.25rem;
+    }
+    .chat-msg.assistant .chat-bubble {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-bottom-left-radius: 0.25rem;
+    }
+</style>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Yapay Zeka ile Sohbet</h4>
+            </div>
+            <div class="card-body">
+                <div id="chatContainer" class="border rounded p-3">
+                    <div id="chatMessages"></div>
+                </div>
+                <div class="input-group mt-3">
+                    <input type="text" id="messageInput" class="form-control" placeholder="Mesajınızı yazın..." autocomplete="off" />
+                    <button type="button" id="sendButton" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Gönder
+                    </button>
+                </div>
+                <p id="connectionStatus" class="mt-2 mb-0 small text-muted"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        (function () {
+            var connection = new signalR.HubConnectionBuilder().withUrl("/chathub").withAutomaticReconnect().build();
+            var messagesEl = document.getElementById("chatMessages");
+            var inputEl = document.getElementById("messageInput");
+            var sendBtn = document.getElementById("sendButton");
+            var statusEl = document.getElementById("connectionStatus");
+            var currentAssistantRow = null;
+            var currentAssistantBubble = null;
+
+            function addMessage(content, isUser) {
+                var row = document.createElement("div");
+                row.className = "chat-msg " + (isUser ? "user" : "assistant");
+                var bubble = document.createElement("div");
+                bubble.className = "chat-bubble";
+                bubble.textContent = content;
+                row.appendChild(bubble);
+                messagesEl.appendChild(row);
+                messagesEl.parentElement.scrollTop = messagesEl.parentElement.scrollHeight;
+                return bubble;
+            }
+
+            function appendToAssistant(text) {
+                if (!currentAssistantBubble) {
+                    var row = document.createElement("div");
+                    row.className = "chat-msg assistant";
+                    var bubble = document.createElement("div");
+                    bubble.className = "chat-bubble";
+                    currentAssistantRow = row;
+                    currentAssistantBubble = bubble;
+                    row.appendChild(bubble);
+                    messagesEl.appendChild(row);
+                }
+                currentAssistantBubble.textContent += text;
+                messagesEl.parentElement.scrollTop = messagesEl.parentElement.scrollHeight;
+            }
+
+            connection.on("ReceiveUserEcho", function (message) {
+                addMessage(message, true);
+            });
+
+            connection.on("ReceiveToken", function (delta) {
+                appendToAssistant(delta);
+            });
+
+            connection.on("CompleteMessage", function (full) {
+                if (currentAssistantBubble) currentAssistantBubble.textContent = full;
+                currentAssistantBubble = null;
+                currentAssistantRow = null;
+            });
+
+            sendBtn.addEventListener("click", function () {
+                var text = (inputEl.value || "").trim();
+                if (!text) return;
+                currentAssistantBubble = null;
+                currentAssistantRow = null;
+                sendBtn.disabled = true;
+                connection.invoke("SendMessage", text).catch(function (err) {
+                    addMessage("Hata: " + err.message, false);
+                }).finally(function () {
+                    sendBtn.disabled = false;
+                    inputEl.value = "";
+                });
+            });
+
+            inputEl.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    sendBtn.click();
+                }
+            });
+
+            connection.start().then(function () {
+                statusEl.textContent = "Bağlandı.";
+                addMessage("Merhaba, size nasıl yardımcı olabilirim? Kısa ve öz yanıtlar veriyorum.", false);
+            }).catch(function (err) {
+                statusEl.textContent = "Bağlantı hatası: " + err.message;
+            });
+
+            connection.onreconnecting(function () {
+                statusEl.textContent = "Yeniden bağlanıyor...";
+            });
+            connection.onreconnected(function () {
+                statusEl.textContent = "Bağlandı.";
+            });
+            connection.onclose(function () {
+                statusEl.textContent = "Bağlantı kapandı.";
+            });
+        })();
+    </script>
