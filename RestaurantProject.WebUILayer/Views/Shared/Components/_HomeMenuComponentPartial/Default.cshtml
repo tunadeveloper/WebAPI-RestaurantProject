@@ -35,8 +35,8 @@
                         @foreach(var product in category.Products)
                         {
                             <div class="col-lg-4 menu-item">
-                                <a href="/yummy-red-1.0.0/assets/img/menu/@product.ProductImageUrl" class="glightbox">
-                                    <img src="/yummy-red-1.0.0/assets/img/menu/@product.ProductImageUrl" class="menu-img img-fluid" alt="">
+                                <a href="@product.ProductImageUrl" class="glightbox">
+                                    <img src="@product.ProductImageUrl" class="menu-img img-fluid" alt="" style="width: 100%; height: 280px; object-fit: cover;">
                                 </a>
                                 <h4>@product.ProductName</h4>
                                 <p class="ingredients">@product.ProductDescription</p>
